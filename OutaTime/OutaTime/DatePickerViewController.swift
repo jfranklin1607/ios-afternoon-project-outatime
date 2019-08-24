@@ -10,14 +10,24 @@ import UIKit
 
 protocol DatePickerDelegate {
     
-    func destinationDateWasChosen(_ Date: DatePickerDelegate)
+    func destinationDateWasChosen(_ Date: Date)
 }
 
 class DatePickerViewController: UIViewController {
 
-    @IBOutlet weak var datePicker: UIDatePicker!
-    
     var delegate:DatePickerDelegate?
+    
+    @IBOutlet weak var datePicker: UIDatePicker!
+  
+    @IBAction func doneTapped(_ sender: Any) {
+        
+        delegate?.destinationDateWasChosen(datePicker.date)
+        dismiss(animated: true, completion: nil)
+    }
+    @IBAction func cancelTapped(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     
     
     override func viewDidLoad() {
@@ -26,16 +36,6 @@ class DatePickerViewController: UIViewController {
         
     }
     
-    @IBAction func setDestinationTapped(_ sender: Any) {
-        
-        DatePickerDelegate.self
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func travelBackTapped(_ sender: Any) {
-        
-        dismiss(animated: true, completion: nil)
-    }
     
 }
 
